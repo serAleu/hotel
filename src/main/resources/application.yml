@@ -1,0 +1,7 @@
+server:
+  port: 8383
+spring:
+  application:
+    name: universe
+say-hello:
+  to: World
