@@ -3,7 +3,6 @@ package ru.demonstration.project.universe.config;
 import feign.Feign;
 import feign.Request;
 import feign.Retryer;
-import feign.auth.BasicAuthRequestInterceptor;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import lombok.Getter;
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import ru.demonstration.project.universe.web.client.UniverseFeignClient;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import static feign.Logger.Level.FULL;

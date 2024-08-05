@@ -19,6 +19,4 @@ public abstract class BaseJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    public abstract String repositoryName();
 }

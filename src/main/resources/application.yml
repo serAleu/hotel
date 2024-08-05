@@ -4,6 +4,24 @@ server:
 spring:
   application:
     name: universe
+  kafka:
+    bootstrap-servers: host.docker.internal:29092,host.docker.internal:29093
+    listener:
+      ack-mode: record
+    producer:
+      client-id: ${spring.application.name}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: ru.demonstration.project.universe.config.DltMessageSerializer
+      retries: 3
+    consumer:
+      group-id: ${spring.application.name}
+      autoOffsetReset: earliest
+      keyDeserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      valueDeserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    properties:
+      spring.json.value.default.type: ru.demonstration.project.universe.kafka_queue.dto.JsonMessage
+      spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+      spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
   h2:
     console:
       enabled: true
@@ -16,15 +34,13 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password:
-  flyway:
-    baselineOnMigrate: ${BASELINE_ON_MIGRATE:true}
   config:
     activate:
       on-profile: ${PROFILE:default}
   jpa:
     open-in-view: ${SPRING_JPA_OPEN_IN_VIEW:false}
     database-platform: org.hibernate.dialect.H2Dialect
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
     properties:
@@ -33,16 +49,19 @@ spring:
   main:
     allow-bean-definition-overriding: ${SPRING_ALLOW_BEAN_OVERRIDING:true}
 
+kafka:
+  topics:
+    test-topic: topic1
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+
 web:
   client:
     base-url: ${WEB_CLIENT_BASE_URL:http://localhost:8383}
-    ccris:
-      group-code: ${WEB_CLIENT_CCRIS_GROUP_CODE:11}
-      product-type: ${WEB_CLIENT_CCRIS_PRODUCT_TYPE:CCRIS_SEARCH}
-    review:
-      product-type: ${WEB_CLIENT_CCRIS_PRODUCT_TYPE:IRISS}
-    retrieve-report:
-      timeout-before-request: ${WEB_CLIENT_TIMEOUT_BEFORE_REPORT_REQUEST:60000}
     feign:
       options:
         connect-timeout-millis: ${CONNECT_TIMEOUT_MILLIS:300}

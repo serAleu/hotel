@@ -1,12 +1,12 @@
 package ru.demonstration.project.universe.data.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import ru.demonstration.project.universe.utils.enums.Name;
+import ru.demonstration.project.universe.utils.enums.Target;
 
 import java.time.LocalDateTime;
 
@@ -21,12 +21,9 @@ public class UniverseAppRequestEntity extends BaseJpaEntity {
     @Column(name = "added_at")
     private LocalDateTime addedAt;
     @Column(name = "name")
-    private String name;
-    @Column(name = "request_type")
-    private String requestType;
-
-    @Override
-    public String repositoryName() {
-        return null;
-    }
+    @Enumerated(EnumType.STRING)
+    private Name name;
+    @Column(name = "target_in_universe")
+    @Enumerated(EnumType.STRING)
+    private Target target;
 }
