@@ -1,7 +1,54 @@
 server:
   port: 8383
+
 spring:
   application:
     name: universe
-say-hello:
-  to: World
+  h2:
+    console:
+      enabled: true
+      path: /h2-consolechka
+  sql:
+    init:
+      mode: always
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  flyway:
+    baselineOnMigrate: ${BASELINE_ON_MIGRATE:true}
+  config:
+    activate:
+      on-profile: ${PROFILE:default}
+  jpa:
+    open-in-view: ${SPRING_JPA_OPEN_IN_VIEW:false}
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  main:
+    allow-bean-definition-overriding: ${SPRING_ALLOW_BEAN_OVERRIDING:true}
+
+web:
+  client:
+    base-url: ${WEB_CLIENT_BASE_URL:http://localhost:8383}
+    ccris:
+      group-code: ${WEB_CLIENT_CCRIS_GROUP_CODE:11}
+      product-type: ${WEB_CLIENT_CCRIS_PRODUCT_TYPE:CCRIS_SEARCH}
+    review:
+      product-type: ${WEB_CLIENT_CCRIS_PRODUCT_TYPE:IRISS}
+    retrieve-report:
+      timeout-before-request: ${WEB_CLIENT_TIMEOUT_BEFORE_REPORT_REQUEST:60000}
+    feign:
+      options:
+        connect-timeout-millis: ${CONNECT_TIMEOUT_MILLIS:300}
+        read-timeout-millis: ${READ_TIMEOUT_MILLIS:3000}
+        follow-redirects: ${FOLLOW_REDIRECT:true}
+      retryer:
+        period: ${RETRYER_PERIOD:100}
+        duration: ${RETRYER_DURATION:1}
+        max-attempts: ${RETRYER_MAX_ATTEMPTS:1}
