@@ -1,16 +1,16 @@
-package ru.demonstration.project.universe.kafka_queue.listener;
+package ru.demonstration.project.universe.kafka.consumer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
-import ru.demonstration.project.universe.kafka_queue.dto.JsonMessage;
+import ru.demonstration.project.universe.kafka.dto.JsonMessage;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class KafkaConsumerListeners {
+public class KafkaConsumer {
 
     @KafkaListener(
             // Определяет группу консюмера

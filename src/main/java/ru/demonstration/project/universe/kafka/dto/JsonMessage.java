@@ -1,4 +1,4 @@
-package ru.demonstration.project.universe.kafka_queue.dto;
+package ru.demonstration.project.universe.kafka.dto;
 
 import lombok.Getter;
 
