@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: universe
+    name: hotel
   kafka:
     bootstrap-servers: host.docker.internal:29092,host.docker.internal:29093
     listener:
@@ -11,7 +11,7 @@ spring:
     producer:
       client-id: ${spring.application.name}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: ru.demonstration.project.universe.config.DltMessageSerializer
+      value-serializer: ru.demonstration.project.config.DltMessageSerializer
       retries: 3
     consumer:
       group-id: ${spring.application.name}
@@ -19,7 +19,7 @@ spring:
       keyDeserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       valueDeserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
     properties:
-      spring.json.value.default.type: ru.demonstration.project.universe.kafka_queue.dto.JsonMessage
+      spring.json.value.default.type: ru.demonstration.project.kafka.dto.JsonMessage
       spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
       spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
   h2:

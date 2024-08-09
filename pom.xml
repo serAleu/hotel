@@ -10,9 +10,9 @@
 	</parent>
 
 	<groupId>ru.demonstration.project</groupId>
-	<artifactId>universe</artifactId>
+	<artifactId>hotel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>universe</name>
+	<name>hotel</name>
 	<description>Self-Triggering project</description>
 
 	<properties>
@@ -28,9 +28,59 @@
 		<jaxb-api.version>2.4.0-b180830.0359</jaxb-api.version>
 		<org.springframework.kafka.version>3.2.1</org.springframework.kafka.version>
 		<hibernate-core.version>6.1.7.Final</hibernate-core.version>
+		<springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>
+		<openapi-generator-maven-plugin.version>7.7.0</openapi-generator-maven-plugin.version>
+		<jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
+		<springfox-swagger2.version>3.0.0</springfox-swagger2.version>
+		<validation-api.version>2.0.1.Final</validation-api.version>
+		<javax-annotation-api.version>1.3.2</javax-annotation-api.version>
+		<javax.servlet.version>2.5</javax.servlet.version>
+		<swagger-core-jakarta.version>2.2.7</swagger-core-jakarta.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${javax.servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>${javax-annotation-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${validation-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>${jackson-databind-nullable.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox-swagger2.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>io.swagger.core.v3</groupId>
+					<artifactId>swagger-annotations</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-core-jakarta</artifactId>
+			<version>${swagger-core-jakarta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc-openapi-starter-webmvc-ui.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
@@ -119,6 +169,32 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>${openapi-generator-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>
+								${project.basedir}/src/main/resources/hotel_open_api_controllers.yml
+							</inputSpec>
+							<generatorName>spring</generatorName>
+							<apiPackage>com.foreach.openapi.api</apiPackage>
+							<modelPackage>com.foreach.openapi.model</modelPackage>
+							<supportingFilesToGenerate>
+								ApiUtil.java
+							</supportingFilesToGenerate>
+							<configOptions>
+								<delegatePattern>true</delegatePattern>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

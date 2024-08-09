@@ -1,0 +1,102 @@
+openapi: 3.0.3
+info:
+  title: The Best Hotel
+  version: 0.1.2
+servers:
+  - url: http://localhost:8383/api/v1
+    description: Test
+paths:
+  /hotel/finish/{is_finish}:
+    post:
+      summary: Finish the Hotel working
+      tags:
+        - WebClientHotelGuestDto
+      operationId: closeTheHotel
+      parameters:
+        - name: is_finish
+          in: path
+          required: true
+          description: Hotel closure confirmation
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: The hotel has successfully completed its work
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebClientHotelGuestDtos'
+        'default':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /hotel/catch-all-the-criminals:
+    get:
+      summary: Catch all the criminals in the Hotel
+      tags:
+        - WebClientHotelGuestDto
+      operationId: catchAllTheCriminals
+      responses:
+        '200':
+          description: The policeman caught all the criminals
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success'
+        'default':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    WebClientHotelGuestDto:
+      type: object
+      required:
+        - id
+        - name
+        - last_target
+        - status
+      properties:
+        id:
+          type: integer
+          example: 123
+        name:
+          type: string
+          example: IVAN
+        last_target:
+          type: string
+          example: WALKING
+        status:
+          type: string
+          enum:
+            - ALIVE
+            - DEAD
+    WebClientHotelGuestDtos:
+      type: array
+      items:
+        $ref: '#/components/schemas/WebClientHotelGuestDto'
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    Success:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+
