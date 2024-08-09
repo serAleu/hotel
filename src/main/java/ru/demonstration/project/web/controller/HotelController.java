@@ -1,7 +1,7 @@
 package ru.demonstration.project.web.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +12,7 @@ import ru.demonstration.project.web.client.dto.WebClientHotelGuestDto;
 
 @Tag(name = "The Hotel controller")
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RequestMapping("/hotel")
 public class HotelController {
 
@@ -20,7 +20,7 @@ public class HotelController {
     public ResponseEntity<String> start(@RequestBody WebClientHotelGuestDto request) {
         try {
             System.out.println(request);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok("I'm here, master!");
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

@@ -71,3 +71,7 @@ web:
         period: ${RETRYER_PERIOD:100}
         duration: ${RETRYER_DURATION:1}
         max-attempts: ${RETRYER_MAX_ATTEMPTS:1}
+
+springdoc:
+  swagger-ui:
+    url: src/main/resources/hotel_open_api_controllers.yml

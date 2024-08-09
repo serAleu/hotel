@@ -3,7 +3,6 @@ package ru.demonstration.project.config;
 import feign.Feign;
 import feign.Request;
 import feign.Retryer;
-import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,7 +40,7 @@ public class HotelConfig {
     public HotelFeignClient hotelFeignClient() {
         return Feign.builder()
                 .encoder(new JacksonEncoder())
-                .decoder(new JacksonDecoder())
+//                .decoder(new JacksonDecoder())
                 .options(new Request.Options((long) webClientFeignOptionsReadTimeoutMillis,
                         TimeUnit.MILLISECONDS, (long) webClientFeignOptionsConnectTimeoutMillis, TimeUnit.MILLISECONDS,
                         webClientFeignOptionsFollowRedirects))
