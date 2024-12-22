@@ -18,7 +18,7 @@ public class HotelProcessor {
     private final HotelFeignClient hotelFeignClient;
     private final HotelJpaService hotelJpaService;
 
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 1)
     public void addNewGuest() {
         HotelAppRequestEntity request = hotelJpaService.save(HotelAppUtils.createRandomHotelAppRequestEntity());
         UserEntity user = hotelJpaService.save(HotelAppUtils.createUserEntity(request));

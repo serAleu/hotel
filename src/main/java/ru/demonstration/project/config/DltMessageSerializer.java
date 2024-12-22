@@ -7,6 +7,7 @@ import org.apache.kafka.common.serialization.Serializer;
 
 import java.util.Map;
 
+//dlt - это listener
 public class DltMessageSerializer<T> implements Serializer<T> {
 
     private final ObjectMapper objectMapper = new ObjectMapper();

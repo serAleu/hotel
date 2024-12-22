@@ -30,7 +30,7 @@ spring:
     init:
       mode: always
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:hoteldb;DB_CLOSE_DELAY=-1
     driverClassName: org.h2.Driver
     username: sa
     password:
@@ -75,3 +75,5 @@ web:
 springdoc:
   swagger-ui:
     url: src/main/resources/hotel_open_api_controllers.yml
+
+gigachat:
